@@ -277,7 +277,7 @@ Customer.getFatcamm = (email, result) => {
       }
 */
 
-let eflag=-1;
+//let eflag=-1;
    let u_id=res[0].id; 
 
    console.log("m- uour id is in the model ", u_id)
@@ -306,15 +306,15 @@ let eflag=-1;
           console.log("111111 111  m- array is empty")
 
       }else{ //
-        eflag=1;
+       // eflag=1;
         res.datasrc=res212;
-        console.log(" ccccccccarray is notem")
+        console.log("Mod -mmmmm rray is notem")
       }
-
+console.log(" mmmm-- modle rray is notem 1.1 -line 313")
 
     });
   //
-    
+    console.log(" m- mmmmmm array is notem 1.1 -line 317")
      
    //  let 	my_income_range_id=res[0].income_range;
 	  
@@ -331,9 +331,9 @@ let eflag=-1;
   });
 } */
 }
-
+ console.log(" m- mmmmmm array is notem 1.1 -line 334")
 }else{
-  console.log("2 email uxxsers table me xxxxaxnahi hai ")
+  console.log("2 email uxxsers table me xxxxaxnahi hai lin 336")
 
  let resmmm={
   message:'3  EEEEEemail users table me nahi hai ',
