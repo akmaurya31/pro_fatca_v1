@@ -529,7 +529,7 @@ if(urs_email_exist.email!=""){
 
 
 let xml_agamji=jsonxml(arrk);
-      console.log(xml_agamji);
+      console.log('xml_ajamji--- line532', xml_agamji);
 
      fs.appendFile('mynse2.xml', xml_agamji, function (err) {
       if (err) throw err;
