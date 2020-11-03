@@ -262,7 +262,7 @@ Customer.getFatcamm = (email, result) => {
    let u_id=res[0].id; 
    console.log("m- uour id is in the model ", u_id)
    
-    sql.query("SELECT * FROM vk_onbording_kyc where	user_id='"+`${u_id}`+"'", (err, res212) => {
+    sql.query("SELECT * FROM users where id='"+`${u_id}`+"'", (err, res212) => {      // table thi: vk_onbording_kyc  aur cloumn tha - user_id  chnge kiya hai
       if (err) {
 
         err1={
