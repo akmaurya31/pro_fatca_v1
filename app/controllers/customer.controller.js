@@ -367,10 +367,10 @@ if(urs_email_exist.email!=""){
      // res.send(data);
       let urs_full=data
       let urs=data[0]
-      let urs1=data.intbl
+     // let urs1=data.intbl
       let urs2=data.datasrc
      console.log("agamursFULL--",urs_full);
-      console.log("agamurs1--",urs1);
+     // console.log("agamurs1--",urs1);
      console.log("ahgamurs2---",urs2);
      // console.log(urs.exposedPolitically);
 
@@ -445,7 +445,7 @@ if(urs_email_exist.email!=""){
         ubo_applicable_count:'2',
         iin:urs.iin,
         kyc:{
-          app_income_code:urs1[0].id,
+          app_income_code:data[0].income_range,
           net_worth_sign:'+',
           net_worth:'5000',
           net_worth_date:'31-Jul-2015',
