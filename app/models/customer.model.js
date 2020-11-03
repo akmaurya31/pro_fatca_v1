@@ -256,33 +256,13 @@ Customer.getFatcamm = (email, result) => {
       return;
     }   
 
-    if (Array.isArray(res) && res.length) {    
+    if (Array.isArray(res) && res.length) { 
+      if (res[0].hasOwnProperty('email')) {  
 
-      if (res[0].hasOwnProperty('email')) {
-       
-
-   //if(res[0].name ==)
-   
-   // console.log("data is",res[1][0]);
-    
-
-    /*  if(res!== undefined ){
-        if(res[0]!== undefined ){
-          console.log("error:pppp 11111");
-        }
-        console.log("error:pppp 22222");
-      }else{
-
-        console.log("error:kkkkkkk");
-      }
-*/
-
-//let eflag=-1;
    let u_id=res[0].id; 
-
    console.log("m- uour id is in the model ", u_id)
-
-    sql.query("SELECT * FROM 	vk_onbording_kyc where 	user_id='"+`${u_id}`+"'", (err, res212) => {
+   
+    sql.query("SELECT * FROM vk_onbording_kyc where	user_id='"+`${u_id}`+"'", (err, res212) => {
       if (err) {
 
         err1={
@@ -299,22 +279,22 @@ Customer.getFatcamm = (email, result) => {
     
      
       if (!Array.isArray(res212) || !res212.length) {
-            console.log("m- array is empty",res212)   
-  
+          console.log("vk_onbording_kyc res212 khaali means khaali hai ",res212)   
           result({ status:200, message:"email is not found in the another vk_onbording_kyc ", kind: "qqnot_found" }, null);
           return;
-          console.log("111111 111  m- array is empty")
+          console.log(" Bakwaas is empty lin 286")
 
       }else{ //
        // eflag=1;
         res.datasrc=res212;
-        console.log("Mod -mmmmm rray is notem")
+		result(null, res);
+        console.log(" Email Found in vk_onbording_kyc table res212 me array hai - line 291")
+		return;
       }
-console.log(" mmmm-- modle rray is notem 1.1 -line 313")
-
+console.log(" next -line 293")
     });
   //
-    console.log(" m- mmmmmm array is notem 1.1 -line 317")
+    console.log(" next -line 317")
      
    //  let 	my_income_range_id=res[0].income_range;
 	  
@@ -331,7 +311,8 @@ console.log(" mmmm-- modle rray is notem 1.1 -line 313")
   });
 } */
 }
- console.log(" m- mmmmmm array is notem 1.1 -line 334")
+
+ console.log(" m- mmmmmm array is notem 1.1 -line 334") 
 }else{
   console.log("2 email uxxsers table me xxxxaxnahi hai lin 336")
 
