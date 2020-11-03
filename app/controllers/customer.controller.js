@@ -733,3 +733,154 @@ exports.handler = function(context, event, callback) {
              }).catch(err=>{console.log(err)});
   
             };
+
+   ////////////////
+
+
+exports.readFatca1_nov= (req, res) => {  
+
+  const postarray= { email:req.body.email }
+
+  Customer.getFatcamm_nov(postarray.email,(err, data) => {
+
+    if(data!=null){        
+      if (!Array.isArray(data) || !data.length) {                
+     return res.json({
+       success: 200,
+       message: "Email Record not Found in user table"
+     });
+   }}
+   
+   let urs=data[0]
+   let resdatemy=String(urs.date_of_birrth);        
+   let xb=resdatemy.split(" ");     
+   let mydob_xb=xb[2]+"-"+xb[1]+"-"+xb[3]
+   let pep= (urs.exposedPolitically == '1') ? "N" : "Y";
+   //console.log("res line 844",urs);
+   //return
+
+   
+   let arrk={NMFIIService:{service_request:{
+    appln_id:'MFS21399',
+    password:'Account@2121',
+    broker_code:'ARN-21399',
+    pan:urs.pan_card,
+    tax_status:'01',
+    investor_name:urs.name,
+    chkExempIndValid:'N',
+    editor_id:'KGNANA',
+    ubo_applicable_count:'2',
+    iin:urs.iin,
+    kyc:{
+      app_income_code:urs.income_range,
+      net_worth_sign:'+',
+      net_worth:'5000',
+      net_worth_date:'31-Jul-2015',
+     // pep: testBoolean ? "attributeTwo" : "attributeTwoToo",
+    //  pep: if(urs.exposedPolitically == '1') ? "N" : "Y",
+       pep:pep,
+      occ_code:urs.occupation,
+      source_wealth:'03',
+      corp_servs:'01'
+    },
+    Fatca:{
+         dob:mydob_xb,   //timezone issue
+         addr_type:"1",  //<--- from table doc address
+         data_src:"E", //<---  from Phycial or Email
+        log_name:urs.email,     //email id already dynamic
+         country_of_birth:'IND', //<---
+          place_birth: urs.city,
+        tax_residency:NaN,  //<---
+       country_tax_residency1:urs.taxcountry,  //<---
+        tax_payer_identityno1:'PYBQI9229X',  //<---
+         id1_type:'C',  //<---
+        country_tax_residency2:'',
+       tax_payer_identityno2:'',
+        id2_type:'',
+        country_tax_residency3:'',
+        tax_payer_identityno3:'',
+        id3_type:'',
+        country_tax_residency4:'',
+        tax_payer_identityno4:'',
+        id4_type:'',
+        ffi_drnfe:'',
+        nffe_catg:'',
+        nature_bus:'',
+        act_nfe_subcat:'',
+        stock_exchange:'',
+        listed_company:'',
+        us_person:'N',
+        exemp_code:'',
+        giin_applicable:'',
+        giin:'',
+        giin_exem_cat:'',
+        sponcer_availability:'',
+        sponcer_entity:'',
+        giin_not_app:'',
+        fatca_dec_received:'Y',
+    },
+    ubo:{
+           ubo_add1:'df',
+           ubo_add2:'ddd',
+           ubo_add3:'dd',
+           ubo_master_codes:'C04',
+           ubo_pan_no:'THTHT1234P',
+           ubo_name:'BDDD',
+           ubo_country_tax_residency:'IND',
+           ubo_cob:'TN',
+           ubo_cocn:'IND',
+           ubo_country:'IND',
+          ubo_dob:'14-Jan-1988',
+          ubo_father_nam:'JDFD',
+          ubo_gender:'M',
+          ubo_holding_perc:'100',
+          ubo_occ_code:'3D',
+          ubo_tel_no:'5151515',
+          ubo_mobile:'9876543121',
+          ubo_pincode:'123123',
+          ubo_city:'SDF',
+          ubo_state:'SDF',
+         ubo_add_type:'1',
+         ubo_id_type:'C',
+         ubo_tin_no:'SADFD6265D'
+    }//ubo  
+  }//service_request
+} //NMFIIService
+}//else
+
+let xml_agamji=jsonxml(arrk);
+
+axios.post('https://uat.nsenmf.com/NMFIITrxnService/NMFTrxnService/FATCAKYCUBOREG',
+        xml_agamji,
+        {headers:
+          {'Content-Type': 'text/xml'}
+        }).then(res22=>{
+
+          console.log("C- Output XML - Line 946", res22)
+          let result1 = convert.xml2js(res22.data, {compact: true, spaces: 4});
+          let fatcaresult=result1.DataSet['diffgr:diffgram'].NMFIISERVICES.service_status.service_return_code._text;
+          let fatcaresult2=result1.DataSet['diffgr:diffgram'].NMFIISERVICES.service_response;
+          console.log("C- Output XML - Line 950", result1,fatcaresult,fatcaresult2)
+          let agammess='';
+
+          if(fatcaresult==0){    
+            agammess= {
+               status:200,
+               message_0:'Success',            
+               message: fatcaresult2  
+             }
+           }else{
+             agammess= {
+               status:200,
+               message_0:'Failed',
+              // message_1: fatcaresult2,
+              // message_1_0 :  fatcaresult2[0].return_msg._text,  
+              // message_1_1 :  fatcaresult2[1].return_msg._text,
+               message:  { "0": fatcaresult2[0].return_msg._text, "1": fatcaresult2[1].return_msg._text  }          
+              }
+           }
+           return res.status(200).json(agammess)
+        }).catch(err=>{console.log(err)});
+console.log("res last line 969");
+  });
+  }   
