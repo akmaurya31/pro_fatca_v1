@@ -461,7 +461,7 @@ if(urs_email_exist.email!=""){
         Fatca:{
              dob:mydob_xb,   //timezone issue
              addr_type:"1",  //<--- from table doc address
-             data_src:text, //<---  from table doc DL types
+             data_src:"E", //<---  from table doc DL types
             log_name:urs.email,     //email id already dynamic
              country_of_birth:'IND', //<---
               place_birth: urs.city,
