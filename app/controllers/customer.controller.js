@@ -409,7 +409,7 @@ if(urs_email_exist.email!=""){
   console.log("my resdatemy ",resdatemy,"--------",xb[1],xb[2],xb[3],"mydob_xb",mydob_xb);
 
 //console.log("hi gam");
-     let itype=urs2[0].type;
+   /*  let itype=urs2[0].type;
        itype=itype.toLowerCase();
        console.log("the controllll           ", itype)
      var text;
@@ -428,7 +428,7 @@ if(urs_email_exist.email!=""){
     break;
     default:
     text = "X";
-  }
+  } */
 
      var pep= (urs.exposedPolitically == '1') ? "N" : "Y";
 //jitna ho ske dynamic karo  --as lgendre pancard emnail dob ok. sir
