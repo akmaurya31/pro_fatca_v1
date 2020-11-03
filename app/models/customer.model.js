@@ -316,8 +316,9 @@ let eflag=-1;
   //
     
      
-     let 	my_income_range_id=res[0].income_range;
- if(my_income_range_id>=1){ 
+   //  let 	my_income_range_id=res[0].income_range;
+	  
+/* if(my_income_range_id>=1){ 
   sql.query("SELECT * FROM 	income_range where 	income_range_id='"+`${my_income_range_id}`+"'", (err, res222) => {
     if (err) {
       console.log("error: ", err);
@@ -328,7 +329,7 @@ let eflag=-1;
     console.log("below down",res222)
     result(null, res);    
   });
-}
+} */
 }
 
 }else{
