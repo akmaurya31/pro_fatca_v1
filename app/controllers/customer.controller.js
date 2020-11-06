@@ -865,18 +865,19 @@ axios.post('https://uat.nsenmf.com/NMFIITrxnService/NMFTrxnService/FATCAKYCUBORE
 
           if(fatcaresult==0){    
             agammess= {
-               status:200,
-               message_0:'Success',            
-               message: fatcaresult2  
+              status:200,
+               message:'Successfully',            
+               message_full: fatcaresult2   
              }
            }else{
              agammess= {
-               status:200,
-               message_0:'Failed',
+              status:200,
+               message:'Failed',
               // message_1: fatcaresult2,
               // message_1_0 :  fatcaresult2[0].return_msg._text,  
               // message_1_1 :  fatcaresult2[1].return_msg._text,
-               message:  { "0": fatcaresult2[0].return_msg._text, "1": fatcaresult2[1].return_msg._text  }          
+          //     message_0:  { "0": fatcaresult2[0].return_msg._text, "1": fatcaresult2[1].return_msg._text  },
+               message_full:fatcaresult2          
               }
            }
            return res.status(200).json(agammess)
