@@ -860,24 +860,48 @@ axios.post('https://uat.nsenmf.com/NMFIITrxnService/NMFTrxnService/FATCAKYCUBORE
           let result1 = convert.xml2js(res22.data, {compact: true, spaces: 4});
           let fatcaresult=result1.DataSet['diffgr:diffgram'].NMFIISERVICES.service_status.service_return_code._text;
           let fatcaresult2=result1.DataSet['diffgr:diffgram'].NMFIISERVICES.service_response;
-          console.log("C- Output XML - Line 950", result1,fatcaresult,fatcaresult2)
+     //  console.log("C- Output XML - Line 950", result1)
+       //   console.log("C- Output XML - Line 951", fatcaresult)
+        //  console.log("C- Output XML - Line 956", fatcaresult2)
+		//console.log("i am cool 880");
+		//var gi=typeof fatcaresult2[0].return_msg;
+		//console.log("c- 881- ", gi);
+		
+		let newdata1= fatcaresult2[0].return_msg;
+		let newdata2= fatcaresult2[1].return_msg;
+		if( typeof newdata1 !== "undefined"  || typeof newdata2 !== "undefined"){
+			adddata1= fatcaresult2[0].return_msg._text
+			adddata2= fatcaresult2[1].return_msg._text
+			
+		}else{
+			adddata1= fatcaresult2[0].Status_Desc._text
+			adddata2= fatcaresult2[1].Status_Desc._text
+		}
+		
+		
+	
+			//  console.log("C- Output XML - Line 958", fatcaresult2[0].return_msg._text)
+			//  console.log("C- Output XML - Line 960", fatcaresult2[1].return_msg._text)
+	
+		  
           let agammess='';
+		  
+		  
 
           if(fatcaresult==0){    
             agammess= {
-              status:200,
+               status:200,
                message:'Successfully',            
-               message_full: fatcaresult2   
+               message_full: fatcaresult2  
              }
            }else{
              agammess= {
-              status:200,
-               message:'Failed',
-              // message_1: fatcaresult2,
-              // message_1_0 :  fatcaresult2[0].return_msg._text,  
-              // message_1_1 :  fatcaresult2[1].return_msg._text,
-          //     message_0:  { "0": fatcaresult2[0].return_msg._text, "1": fatcaresult2[1].return_msg._text  },
-               message_full:fatcaresult2          
+               status:200,
+               message:'Successfully',
+              // message_1: fatcaresult2,               
+               data:  { "0": adddata1, "1": adddata2 },              
+ 			   message_third_api:'FAILED',
+			   message_full:fatcaresult2,
               }
            }
            return res.status(200).json(agammess)
