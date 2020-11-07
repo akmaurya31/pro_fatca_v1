@@ -867,16 +867,31 @@ axios.post('https://uat.nsenmf.com/NMFIITrxnService/NMFTrxnService/FATCAKYCUBORE
 		//var gi=typeof fatcaresult2[0].return_msg;
 		//console.log("c- 881- ", gi);
 		
+		let newdata0= fatcaresult2[0];
+		let newdata0_0= fatcaresult2[1];
+		let adddata1="";
+		let	adddata2="";
+		
+		if(typeof newdata0 !== "undefined"  || typeof newdata0_0 !== "undefined"){
 		let newdata1= fatcaresult2[0].return_msg;
 		let newdata2= fatcaresult2[1].return_msg;
+		
+		let newdata3= fatcaresult2[0].Status_Desc;
+		let newdata4= fatcaresult2[1].Status_Desc;
 		if( typeof newdata1 !== "undefined"  || typeof newdata2 !== "undefined"){
 			adddata1= fatcaresult2[0].return_msg._text
 			adddata2= fatcaresult2[1].return_msg._text
 			
-		}else{
+		}else if(typeof newdata3 !== "undefined"  || typeof newdata4 !== "undefined"){
 			adddata1= fatcaresult2[0].Status_Desc._text
 			adddata2= fatcaresult2[1].Status_Desc._text
+		}else{
+			adddata1="";
+			adddata2="";
+			
 		}
+		}
+		
 		
 		
 	
